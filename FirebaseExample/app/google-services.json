@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "156535955383",
+    "project_id": "cursofirebase-39db5",
+    "storage_bucket": "cursofirebase-39db5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156535955383:android:c80a23f26fc6e31d621232",
+        "android_client_info": {
+          "package_name": "com.titi.firebaseexample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg27VqxKVPZSiIpbH_1svImDT1l44uxq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156535955383:android:fdddcf2c40a2a248621232",
+        "android_client_info": {
+          "package_name": "com.titi.firebaseexample.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg27VqxKVPZSiIpbH_1svImDT1l44uxq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
