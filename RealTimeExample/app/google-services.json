@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "663012859275",
+    "project_id": "realtimeexample-f6dc3",
+    "storage_bucket": "realtimeexample-f6dc3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663012859275:android:261399e4249e57098de38e",
+        "android_client_info": {
+          "package_name": "com.titi.realtimeexample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb4TSr5Zi68Ja9b9cU0paJEi8pJgixQfc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
