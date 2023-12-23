@@ -1,37 +1,28 @@
 package com.titi.realtimeexample
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.google.firebase.FirebaseApp
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.getValue
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.titi.realtimeexample.ui.theme.RealTimeExampleTheme
-import kotlin.random.Random
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    private lateinit var firebaseInstance: FirebaseInstance
+    private val mainViewModel : MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -41,19 +32,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    firebaseInstance = FirebaseInstance(this)
-
-                    var value by remember {
-                        mutableStateOf("")
-                    }
-
-                     setupListeners(firebaseInstance){
-                         value = it
-                     }
+                    val posts by mainViewModel.post.collectAsState()
 
                     MainScreen(
-                        value = value,
-                        onClick = firebaseInstance::writeOnFirebase
+                        value = posts,
+                        onClick = mainViewModel::writeOnFirebase
                     )
                 }
             }
@@ -61,58 +44,26 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-fun setupListeners(
-    firebaseInstance: FirebaseInstance,
-    onValueChange: (String) -> Unit
-){
 
-//    var value : String? = null
-
-    val postListener = object : ValueEventListener{
-        override fun onDataChange(snapshot: DataSnapshot) {
-//            value = snapshot.getValue<String>()
-            onValueChange(snapshot.getValue<String>() ?: "")
-        }
-
-        override fun onCancelled(error: DatabaseError) {
-            TODO("Not yet implemented")
-        }
-    }
-    firebaseInstance.setUpListener(postListener)
-}
 
 @Composable
 fun MainScreen(
-    value: String,
+    value: List<Post>,
     onClick: () -> Unit
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center)
     {
-        Column {
-            Button(onClick = { onClick() }) {
-                Text(text = "Actualizar")
+        LazyColumn(){
+            item{
+                Button(onClick = { onClick() }) {
+                    Text(text = "Actualizar")
+                }
             }
-            Text(text = value)
+            items(value){
+                Text(text = it.title!!)
+            }
         }
-    }
-}
-
-class FirebaseInstance(context: Context){
-
-    private val database = Firebase.database
-    private val databaseRef = database.reference
-    init {
-        FirebaseApp.initializeApp(context)
-    }
-
-    fun writeOnFirebase(){
-        val randomValue = Random.nextInt(100).toString()
-        databaseRef.setValue("Mi primera escritura $randomValue")
-    }
-
-    fun setUpListener(postListener: ValueEventListener) {
-        databaseRef.addValueEventListener(postListener)
     }
 }
