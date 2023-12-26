@@ -25,7 +25,9 @@ class FirebaseInstance @Inject constructor(
         val postListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 value = snapshot.children.map {
-                    it.getValue(Post::class.java)!!
+                    it.getValue(Post::class.java)!!.copy(
+                        id = it.key
+                    )
                 }
                 valueChanged(value)
             }
@@ -36,9 +38,14 @@ class FirebaseInstance @Inject constructor(
         }
         databaseRef.addValueEventListener(postListener)
     }
+
+    fun deleteOnFirebase(reference: String) {
+        databaseRef.child(reference).removeValue()
+    }
 }
 
 data class Post(
     val title: String? = null,
-    val body: String? = null
+    val body: String? = null,
+    val id: String? = null
 )

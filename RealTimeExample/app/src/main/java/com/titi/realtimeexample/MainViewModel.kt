@@ -29,4 +29,8 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun deleteOnFirebase(reference: String) {
+        firebaseInstance.deleteOnFirebase(reference)
+    }
+
 }

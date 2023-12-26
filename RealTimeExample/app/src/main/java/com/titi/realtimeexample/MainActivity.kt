@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -36,7 +37,10 @@ class MainActivity : ComponentActivity() {
 
                     MainScreen(
                         value = posts,
-                        onClick = mainViewModel::writeOnFirebase
+                        onClick = mainViewModel::writeOnFirebase,
+                        onClickText = {
+                            mainViewModel.deleteOnFirebase(it)
+                        }
                     )
                 }
             }
@@ -49,7 +53,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen(
     value: List<Post>,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onClickText: (String) -> Unit
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -62,7 +67,12 @@ fun MainScreen(
                 }
             }
             items(value){
-                Text(text = it.title!!)
+                Text(
+                    text = it.title!!,
+                    Modifier.clickable {
+                        onClickText(it.id!!)
+                    }
+                )
             }
         }
     }
