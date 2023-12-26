@@ -9,7 +9,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -23,7 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val mainViewModel : MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -49,7 +55,6 @@ class MainActivity : ComponentActivity() {
 }
 
 
-
 @Composable
 fun MainScreen(
     value: List<Post>,
@@ -58,21 +63,43 @@ fun MainScreen(
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center)
+        contentAlignment = Alignment.Center
+    )
     {
-        LazyColumn(){
-            item{
+        LazyColumn() {
+            item {
                 Button(onClick = { onClick() }) {
                     Text(text = "Actualizar")
                 }
             }
-            items(value){
-                Text(
-                    text = it.title!!,
-                    Modifier.clickable {
-                        onClickText(it.id!!)
-                    }
+            items(value) {
+                ListItem(
+                    headlineContent = { Text(it.title!!) },
+                    supportingContent = { Text(it.body!!) },
+                    trailingContent = {
+                        IconButton(onClick = { onClickText(it.id!!) }) {
+                            Icon(
+                                Icons.Filled.Delete,
+                                contentDescription = "Localized description",
+                            )
+                        }
+                    },
                 )
+//                ListItem(
+//                    headlineContent = { Text("One line list item with 24x24 icon") },
+//                    leadingContent = {
+//                        Icon(
+//                            Icons.Filled.Favorite,
+//                            contentDescription = "Localized description",
+//                        )
+//                    }
+//                )
+//                Text(
+//                    text = it.title!!,
+//                    Modifier.clickable {
+//                        onClickText(it.id!!)
+//                    }
+//                )
             }
         }
     }
