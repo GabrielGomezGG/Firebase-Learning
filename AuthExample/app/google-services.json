@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "100621669802",
+    "project_id": "authexample-28171",
+    "storage_bucket": "authexample-28171.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100621669802:android:fe549db116bb32a79fc7d3",
+        "android_client_info": {
+          "package_name": "com.titi.authexample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASn_Q3jWtKUgO_9N4-ZyTZ5u5hohTp6GM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
