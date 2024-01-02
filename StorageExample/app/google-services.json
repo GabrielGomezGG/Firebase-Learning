@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "548204573508",
+    "project_id": "storageexample-1515e",
+    "storage_bucket": "storageexample-1515e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548204573508:android:4c0480f3b7b42507d15d11",
+        "android_client_info": {
+          "package_name": "com.titi.storageexample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWv-yl2jBNDVQ6Cph0Pyz4cu0Q9tDlzHM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
